@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>emogif</title>
+  <style>
+    th {
+      width: 10%;
+    }
+    td {
+      width: 90%;
+    }
+    input[type="text"] {
+      width: 80%;
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    #container {
+      position: relative;
+      margin: 0px;
+      padding: 0px;
+    }
+    #overlay {
+      position: absolute;
+      margin: 0px;
+      padding: 0px;
+      width: 128px;
+      height: 128px;
+      min-width: 16px;
+      min-height: 16px;
+      background-color: #ff222266;
+      z-index: 100;
+    }
+    #corner {
+      position: absolute;
+      margin: 0px;
+      width: 16px;
+      height: 16px;
+      left: 112px;
+      top: 112px;
+      background-color: #ff4444ff;
+      z-index: 200;
+      cursor: e-resize;
+    }
+  </style>
+  <script src='https://unpkg.com/@ffmpeg/ffmpeg@0.9.4/dist/ffmpeg.min.js'></script>
+  <script src="./js/ffmpegUtil.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+<body>
+  <h1>emogif</h1>
+
+  <input type="file" id="file">
+
+  <hr>
+
+  <table id="table">
+      <tr><th>FPS  </th><td><input type="range" id="fps"  ></td></tr>
+      <tr><th>Scale</th><td><input type="range" id="scale"></td></tr>
+      <tr><th>Time </th><td><input type="range" id="timer"></td></tr>
+      <tr><th>Start</th><td><input type="range" id="start"></td></tr>
+      <tr><th>End  </th><td><input type="range" id="end"  ></td></tr>
+    </table>
+  <div id="container">
+    <div id="overlay">
+      <div id="corner"></div>
+    </div>
+    <video id="video">
+      <source id="source" type="video/mp4">
+    </video>
+  </div>
+  <img id="img" alt="">
+</body>
+</html>
