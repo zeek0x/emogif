@@ -23,7 +23,6 @@
     // ============================================================
 
     const handleChange = (event) => {
-      console.log(event);
       const file = event.target.files[0];
       source.src = window.URL.createObjectURL(file);
       video.load();
