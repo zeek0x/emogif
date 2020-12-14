@@ -17,6 +17,7 @@
     const video = document.getElementById('video');
     const source = document.getElementById('source');
     const img = document.getElementById('img');
+    const imgSize = document.getElementById('img-size');
 
     // ============================================================
     // File -> Video -> Style
@@ -162,8 +163,7 @@
         );
       img.src = URL.createObjectURL(blob);
 
-      // TODO: Add size indication.
-      console.log(blob.size);
+      imgSize.textContent = blob.size / 1024 + ' [KB]';
     }
 
     const handleOverlayDbclick = async event => {
