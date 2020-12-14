@@ -40,7 +40,7 @@
       setElementW(table, video.clientWidth);
       setElementX(overlay, 0);
       setElementY(overlay, 0);
-      setBottomRight(corner);
+      setBottomRight(corner, overlay);
     }
     video.addEventListener('loadeddata', handleLoadeddataEvent, false);
 
@@ -79,15 +79,13 @@
     // ============================================================
 
     // Custom Property for 'Div is dragging'.
-    Object.defineProperty(overlay, 'dragging', {
-      writable: true,
-      value: false
-    });
-
-    Object.defineProperty(corner, 'dragging', {
-      writable: true,
-      value: false
-    });
+    const definePropertyDragging = object => {
+      Object.defineProperty(object, 'dragging', {
+        writable: true,
+        value: false
+      });
+    }
+    [overlay, corner].forEach(definePropertyDragging);
 
     const handleOverlayMouseDonw = ({which, target}) => {
       if (which === 1) {
@@ -123,49 +121,49 @@
     document.addEventListener('mouseup', handleMouseUp, false);
     document.addEventListener('mousemove', handleMoveEvent, false);
 
-    // Note: Adhoc utility for overlay & corner.
     // TODO: Fix adhoc...
 
     const move = (dx, dy) => {
-      const p = getPosition(overlay);
-      setElementX(overlay, p.x + dx);
-      setElementY(overlay, p.y + dy);
-      setBottomRight(corner);
+      const {x, y} = getRelativePosition(overlay, container);
+      setElementX(overlay, x + dx);
+      setElementY(overlay, y + dy);
+      setBottomRight(corner, overlay);
     }
+
+    // TODO: Fix adhoc...
 
     const zoom = (dx) => {
-      const s = getSize(overlay);
-      setElementW(overlay, s.w + dx);
-      setElementH(overlay, s.w + dx);
-      setBottomRight(corner);
+      const { w } = getSize(overlay);
+      const sideLength = w + dx;
+      setElementW(overlay, sideLength);
+      setElementH(overlay, sideLength);
+      setBottomRight(corner, overlay);
     }
 
-    const setBottomRight = (child, parent = child.parentNode) => {
-      const ps = getSize(parent);
-      const cs = getSize(child);
-      setElementX(child, ps.w - cs.w);
-      setElementY(child, ps.h - cs.h);
+    const setBottomRight = (child, parent) => {
+      const {w:pw, h:ph} = getSize(parent);
+      const {w:cw, h:ch} = getSize(child);
+      setElementX(child, pw - cw);
+      setElementY(child, ph - ch);
     }
 
     const handleGenerateEmogif = async event => {
-      const p = getPosition(overlay, container);
-      const s = getSize(overlay);
-
       const ss = parseInt(start.value) * timeUnit + '';
       const duration = (parseInt(end.value) - parseInt(start.value)) * timeUnit + '';
-      const x = p.x;
-      const y = p.y;
-      const w = s.w;
-      const h = s.h;
+      const {x, y} = getRelativePosition(overlay, container);
+      const {w, h} = getSize(overlay);
       const _fps = parseInt(fps.value);
       const _scale = parseInt(getMaxVideoLength(video) * parseInt(scale.value) / 100);
+      const _file = file.files[0];
 
       const blob =
         await emogifTranscode(
-          {ss:ss, duration:duration, x:x, y:y, w:w, h:h, fps:_fps, scale:_scale}, file.files[0]
+          {ss:ss, duration:duration, x:x, y:y, w:w, h:h, fps:_fps, scale:_scale}, _file
         );
-      console.log(blob.size);
       img.src = URL.createObjectURL(blob);
+
+      // TODO: Add size indication.
+      console.log(blob.size);
     }
 
     const handleOverlayDbclick = async event => {
@@ -181,26 +179,20 @@
     // Element Util
     // ============================================================
 
-    const getMaxVideoLength = element => {
-      const w = element.videoWidth;
-      const h = element.videoHeight;
+    const getMaxVideoLength = ({videoWidth:w, videoHeight:h}) => {
       return w > h ? w : h;
     }
 
     const getSize = element => {
-      const rect = element.getBoundingClientRect();
-      const w = rect.width;
-      const h = rect.height;
+      const {width:w, height:h} = element.getBoundingClientRect();
       return {w, h};
     }
 
-    // TODO: Fix getPosition adhoc part.
-
-    const getPosition = (child, parent = child.parentNode) => {
-      const rect1 = child.getBoundingClientRect();
-      const rect2 = parent.getBoundingClientRect();
-      const x = rect1.x - rect2.x;
-      const y = rect1.y - rect2.y;
+    const getRelativePosition = (rect1, rect2) => {
+      const {x:x1, y:y1} = rect1.getBoundingClientRect();
+      const {x:x2, y:y2} = rect2.getBoundingClientRect();
+      const x = x1 - x2;
+      const y = y1 - y2;
       return {x, y};
     }
 
