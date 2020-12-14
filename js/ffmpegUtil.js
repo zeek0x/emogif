@@ -7,6 +7,7 @@
   }
 
   const { createFFmpeg, fetchFile } = FFmpeg;
+  // TODO: Set logger & Utilize logger output as system info.
   const ffmpeg = createFFmpeg({ log: true });
   await ffmpeg.load();
 
