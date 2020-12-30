@@ -21,7 +21,7 @@
     const imgSize = document.getElementById('img-size');
 
     // ============================================================
-    // File -> Video -> Style
+    // File Change -> Video Load -> Style Format
     // ============================================================
 
     const handleChange = (event) => {
@@ -32,13 +32,14 @@
     file.addEventListener('change', handleChange);
 
     const handleLoadeddataEvent = event => {
-      fps.value = 10;
-      fps.min = scale.min = 1;
       fps.max = 30; // TODO: set the video fps
+      fps.min = scale.min = 1;
+      fps.value = 10;
       scale.max = 100; // [%]
-      timer.value = start.value = 0;
-      timer.min = start.min = end.min = 0;
+      scale.min = 0;
       timer.max = start.max = end.max = parseInt(video.duration) / timeUnit;
+      timer.min = start.min = end.min = 0;
+      timer.value = start.value = 0;
       setElementW(table, video.clientWidth);
       setElementX(overlay, 0);
       setElementY(overlay, 0);
