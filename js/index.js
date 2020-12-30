@@ -16,6 +16,7 @@
     const corner = document.getElementById('corner');
     const video = document.getElementById('video');
     const source = document.getElementById('source');
+    const imgAnchor = document.getElementById('img-anchor');
     const img = document.getElementById('img');
     const imgSize = document.getElementById('img-size');
 
@@ -161,8 +162,8 @@
         await emogifTranscode(
           {ss:ss, duration:duration, x:x, y:y, w:w, h:h, fps:_fps, scale:_scale}, _file
         );
-      img.src = URL.createObjectURL(blob);
 
+      imgAnchor.href = img.src = URL.createObjectURL(blob);
       imgSize.textContent = blob.size / 1024 + ' [KB]';
     }
 
