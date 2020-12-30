@@ -29,7 +29,7 @@
       $source.src = window.URL.createObjectURL(file);
       $video.load();
     }
-    file.addEventListener('change', handleChange);
+    $file.addEventListener('change', handleChange);
 
     const handleLoadeddataEvent = event => {
       $fps.max = 30; // TODO: set the video fps
