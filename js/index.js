@@ -60,8 +60,8 @@
       }
     })
 
-    const handleClickEvent = event => {
-      $video.playing ? $video.pause() : $video.play()
+    const handleClickEvent = ({target}) => {
+      target.playing ? target.pause() : target.play()
     }
 
     const handleTimeUpdateEvent = event => {
