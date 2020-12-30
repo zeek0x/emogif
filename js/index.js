@@ -37,6 +37,7 @@
       fps.value = 10;
       scale.max = 100; // [%]
       scale.min = 0;
+      scale.value = 31;
       timer.max = start.max = end.max = parseInt(video.duration) / timeUnit;
       timer.min = start.min = end.min = 0;
       timer.value = start.value = 0;
