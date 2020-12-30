@@ -29,7 +29,7 @@
       output
     )
     const data = ffmpeg.FS('readFile', output)
-    return new Blob([data.buffer], { type: 'video/mp4' })
+    return new Blob([data.buffer], { type: 'image/gif' })
   }
 
   $.emogifTranscode = emogifTranscode
