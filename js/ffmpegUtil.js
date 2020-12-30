@@ -1,7 +1,7 @@
-(async (win) => {
+(async ($) => {
   'use strict';
 
-  if (!win.FFmpeg) {
+  if (!$.FFmpeg) {
     console.warn('FFmpeg is not loaded!!!');
     return;
   }
