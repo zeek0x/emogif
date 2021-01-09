@@ -15,7 +15,7 @@
 
 emogif-extensionh is under review at Chrome Web Store...
 
-# License
+# Sample image license
 
 [Big Buck Bunny](https://peach.blender.org/) is licensed under the [Creative Commons Attribution 3.0 license](http://creativecommons.org/licenses/by/3.0/).
 
