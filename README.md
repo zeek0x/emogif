@@ -13,7 +13,7 @@
 
 ## emogif-extension
 
-emogif-extensionh is under review at Chrome Web Store...
+[emogif-extension](https://chrome.google.com/webstore/detail/emogif-extension/dllgedlgfmpmnhgnhnffhjghpilgfmnj) is emogif uploader for slack.
 
 # Sample image license
 
