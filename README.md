@@ -8,12 +8,14 @@
 
 ## How To Use
 
-1. open [https://zeek0x.github.io/emogif/].
+1. open [https://emogif-clip.netlify.app/].
 2. Select file.
 3. Adjust Start, End and red area where you want to crop out.
 4. Double click red area.
 
 ## emogif-extension
+
+Temporarily not working 🙇 
 
 [emogif-extension](https://chrome.google.com/webstore/detail/emogif-extension/dllgedlgfmpmnhgnhnffhjghpilgfmnj) is emogif uploader for slack.
 
