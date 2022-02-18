@@ -1,5 +1,7 @@
 # emogif
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/52727add-ef0b-4448-9634-279eda4196a4/deploy-status)](https://app.netlify.com/sites/emogif-clip/deploys)
+
 ![](https://github.com/zeek0x/emogif/blob/img/screenshot.png?raw=true)
 
 ![](https://github.com/zeek0x/emogif/blob/img/emo.gif?raw=true)
